@@ -14,7 +14,7 @@ public class UsersRestAPI {
 	@Autowired
 	private UsersService usersService;
 	
-	//http://localhost:8080/get-rfid-by-user/83
+	//http://localhost:8080/get-all-users
 	@RequestMapping(value="/get-all-users", method=RequestMethod.GET)
 	public Iterable<User> getAllUsers() {
 		return usersService.findAllUsers();
