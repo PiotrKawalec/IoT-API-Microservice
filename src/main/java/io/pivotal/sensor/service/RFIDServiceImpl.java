@@ -36,13 +36,37 @@ public class RFIDServiceImpl implements RFIDSensorService {
 		this.userRepository = userRepository;
 	}
 
-
 	@Override
 	public Iterable<RFIDEvent> findAllRfidEventsByRfid(String rfid) {
 		// r.setRfidEvents(rs);
 //		return returnDummyRfidEvents();
-		return rfidEventRepository.findByRfid(rfid);
+		return rfidEventRepository.findByRfidRfid(rfid);
 	}
+
+	@Override
+	public Iterable<RFID> findAllRfid() {
+//		return getDummyData12();
+		return rfidRepository.findAll();
+	}
+
+	@Override
+	public RFID findRFIDByUserId(Long userId) {
+		//return getDummyData13();
+		User u = userRepository.findOne(userId);
+		if (u != null) {
+			return u.getRfid();
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public Iterable<RFIDEvent> findAllRfidEventsByRfidBetween(String rfid, Date startTime, Date endTime) {
+//		System.out.println(startTime + " --- " + endTime);
+//		return returnDummyRfidEvents();
+		return rfidEventRepository.findByRfidRfidAndEventTimeBetween(rfid, startTime, endTime);
+	}
+
 
 	private List<RFIDEvent> returnDummyRfidEvents() {
 		List<RFIDEvent> rs = new ArrayList<RFIDEvent>();
@@ -80,11 +104,14 @@ public class RFIDServiceImpl implements RFIDSensorService {
 		rs.add(e2);
 		return rs;
 	}
-
-	@Override
-	public Iterable<RFID> findAllRfid() {
-//		return getDummyData12();
-		return rfidRepository.findAll();
+	
+	private RFID getDummyData13() {
+		RFID r = new RFID();
+		r.setActive(true);
+		r.setRfid("7101010");
+		r.setCreatedTime(new Date(1421160828284l));
+		r.setId(7l);
+		return r;
 	}
 
 	private Iterable<RFID> getDummyData12() {
@@ -133,29 +160,5 @@ public class RFIDServiceImpl implements RFIDSensorService {
 
 		return rs;
 	}
-
-	@Override
-	public RFID findRFIDByUserId(Long userId) {
-//		return getDummyData13();
-		User u = userRepository.findOne(userId);
-		return u.getRfid();
-	}
-
-	private RFID getDummyData13() {
-		RFID r = new RFID();
-		r.setActive(true);
-		r.setRfid("7101010");
-		r.setCreatedTime(new Date(1421160828284l));
-		r.setId(7l);
-		return r;
-	}
-
-
-	@Override
-	public Iterable<RFIDEvent> findAllRfidEventsByRfidBetween(String rfid, Date startTime, Date endTime) {
-//		System.out.println(startTime + " --- " + endTime);
-//		return returnDummyRfidEvents();
-		return rfidEventRepository.findByRfidAndEventTimeBetween(rfid, startTime, endTime);
-	}
-
+	
 }

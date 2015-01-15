@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "TILT_SWITCH_EVENT")
 public class TiltSwitchEvent {
@@ -22,6 +24,7 @@ public class TiltSwitchEvent {
 	private Boolean open;
 	@ManyToOne
 	@JoinColumn(name = "TILT_SWITCH_ID")
+	@JsonIgnore
 	private TiltSwitch tiltSwitch;
 	@Column(name="EVENTTIME")
 	private Date eventTime;

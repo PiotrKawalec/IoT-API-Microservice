@@ -14,21 +14,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Sample requests:
+ * http://localhost:8080/get-all-rfids
+ * http://localhost:8080/get-rfid-events-by-rfid/0909200181
+ * http://localhost:8080/get-rfid-by-user/1
+ * http://localhost:8080/get-all-rfid-events-by-rfid/0909200181/between/2014-06-12T00:00:00.000Z/2015-11-12T00:00:00.000Z
+ * 
+ * @author belle
+ *
+ */
 @RestController
 public class RfidRestAPI {
 
 	@Autowired
 	private RFIDSensorService rfidSensorService;
 	
-	//http://localhost:8080/get-rfid-events-by-rfid/33
-	@RequestMapping(value="/get-rfid-events-by-rfid/{rfid}", method=RequestMethod.GET)
-	public Iterable<RFIDEvent> getRFIDEventByRfid(@PathVariable String rfid) {
-		return rfidSensorService.findAllRfidEventsByRfid(rfid);
-	}
 	//http://localhost:8080/get-all-rfids
 	@RequestMapping(value="/get-all-rfids", method=RequestMethod.GET)
 	public Iterable<RFID> getAllRFIDs() {	
 		return rfidSensorService.findAllRfid();
+	}
+	
+	//http://localhost:8080/get-rfid-events-by-rfid/0909200181
+	@RequestMapping(value="/get-rfid-events-by-rfid/{rfid}", method=RequestMethod.GET)
+	public Iterable<RFIDEvent> getRFIDEventByRfid(@PathVariable String rfid) {
+		return rfidSensorService.findAllRfidEventsByRfid(rfid);
 	}
 	
 	//http://localhost:8080/get-rfid-by-user/3333

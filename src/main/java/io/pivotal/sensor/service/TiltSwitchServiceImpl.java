@@ -28,11 +28,29 @@ public class TiltSwitchServiceImpl implements TiltSwitchSensorService {
 		this.tiltSwitchSensorRepository = tiltSwitchSensorRepository;
 	}
 
-
 	@Override
 	public Iterable<TiltSwitch> getAllTiltSwitches() {
 		// return getDummyData3();
 		return tiltSwitchSensorRepository.findAll();
+	}
+
+	@Override
+	public TiltSwitch getTiltSwitchByTiltSwitchID(String tiltSwitchId) {
+		// return getDummyData2();
+		return tiltSwitchSensorRepository.findByTiltSwitchId(tiltSwitchId);
+	}
+
+	@Override
+	public Iterable<TiltSwitchEvent> getAllTiltSwitchEventsByTiltSwitchID(
+			String tiltSwitchId) {
+		// return getDummyData();
+		return tiltSwitchEventRepository.findByTiltSwitchTiltSwitchId(tiltSwitchId);
+	}
+
+	@Override
+	public Iterable<TiltSwitchEvent> getAllTiltSwitchEventsByTiltSwitchIDBetween(String tiltSwitchId, Date startDate, Date endDate) {
+		// return getDummyData();
+		return tiltSwitchEventRepository.findByTiltSwitchTiltSwitchIdAndEventTimeBetween(tiltSwitchId, startDate, endDate);
 	}
 
 	private Iterable<TiltSwitch> getDummyData3() {
@@ -49,27 +67,6 @@ public class TiltSwitchServiceImpl implements TiltSwitchSensorService {
 		r.setId(1l);
 		rs.add(r);
 		return rs;
-	}
-
-	@Override
-	public TiltSwitch getTiltSwitchByTiltSwitchID(String tiltSwitchId) {
-		// return getDummyData2();
-		return tiltSwitchSensorRepository.findByTiltSwitchId(tiltSwitchId);
-	}
-
-	private TiltSwitch getDummyData2() {
-		TiltSwitch r1 = new TiltSwitch();
-		r1.setTiltSwitchId("332201010");
-		r1.setCreatedTime(new Date(1421160868284l));
-		r1.setId(1l);
-		return r1;
-	}
-
-	@Override
-	public Iterable<TiltSwitchEvent> getAllTiltSwitchEventsByTiltSwitchID(
-			String tiltSwitchId) {
-		// return getDummyData();
-		return tiltSwitchEventRepository.findByTiltSwitchTiltSwitchId(tiltSwitchId);
 	}
 
 	private List<TiltSwitchEvent> getDummyData() {
@@ -118,10 +115,12 @@ public class TiltSwitchServiceImpl implements TiltSwitchSensorService {
 		return rs;
 	}
 
-	@Override
-	public Iterable<TiltSwitchEvent> getAllTiltSwitchEventsByTiltSwitchIDBetween(String tiltSwitchId, Date startDate, Date endDate) {
-		// return getDummyData();
-		return tiltSwitchEventRepository.findByTiltSwitchTiltSwitchIdAndEventTimeBetween(tiltSwitchId, startDate, endDate);
+	private TiltSwitch getDummyData2() {
+		TiltSwitch r1 = new TiltSwitch();
+		r1.setTiltSwitchId("332201010");
+		r1.setCreatedTime(new Date(1421160868284l));
+		r1.setId(1l);
+		return r1;
 	}
 
 }

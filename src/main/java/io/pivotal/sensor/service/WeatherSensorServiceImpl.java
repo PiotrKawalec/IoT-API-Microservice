@@ -26,23 +26,6 @@ public class WeatherSensorServiceImpl implements WeatherSensorService {
 		return weatherSensorRepository.findBySensorID(sensorID);
 	}
 
-	private List<Weather> getDummyData() {
-		List<Weather> ws = new ArrayList<Weather>();
-		Weather w1 = new Weather();
-		w1.setHumidity(15.0);
-		w1.setSensorID("201");
-		w1.setTemperature(23.4);
-		w1.setEventTime(new Date(1421160868284l));
-		ws.add(w1);
-		Weather w = new Weather();
-		w.setHumidity(15.2);
-		w.setSensorID("201");
-		w.setTemperature(23.2);
-		w.setEventTime(new Date(1421160828284l));
-		ws.add(w);
-		return ws;
-	}
-
 	@Override
 	public List<Weather> findWeatherSensorReadingBetween(String sensorID, Date startTime, Date endTime) {
 //		return getDummyData();
@@ -60,5 +43,20 @@ public class WeatherSensorServiceImpl implements WeatherSensorService {
 		return weatherSensorRepository.findBySensorIDAndEventTimeIsBefore(sensorID, time);
 	}
 
-
+	private List<Weather> getDummyData() {
+		List<Weather> ws = new ArrayList<Weather>();
+		Weather w1 = new Weather();
+		w1.setHumidity(15.0);
+		w1.setSensorID("201");
+		w1.setTemperature(23.4);
+		w1.setEventTime(new Date(1421160868284l));
+		ws.add(w1);
+		Weather w = new Weather();
+		w.setHumidity(15.2);
+		w.setSensorID("201");
+		w.setTemperature(23.2);
+		w.setEventTime(new Date(1421160828284l));
+		ws.add(w);
+		return ws;
+	}
 }

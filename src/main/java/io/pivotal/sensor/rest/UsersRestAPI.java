@@ -8,6 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Sample requests:
+ * http://localhost:8080/get-all-users
+ * 
+ * @author belle
+ *
+ */
 @RestController
 public class UsersRestAPI {
 
