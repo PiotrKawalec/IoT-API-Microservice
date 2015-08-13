@@ -5,5 +5,23 @@
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
+	<classpathentry kind="lib" path="/Users/pkawalec/.m2/repository/org/springframework/cloud/spring-cloud-netflix-core/1.0.3.RELEASE/spring-cloud-netflix-core-1.0.3.RELEASE.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.springframework.cloud"/>
+			<attribute name="maven.artifactId" value="spring-cloud-netflix-core"/>
+			<attribute name="maven.version" value="1.0.3.RELEASE"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/pkawalec/.m2/repository/org/springframework/cloud/spring-cloud-commons/1.0.2.RELEASE/spring-cloud-commons-1.0.2.RELEASE.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.springframework.cloud"/>
+			<attribute name="maven.artifactId" value="spring-cloud-commons"/>
+			<attribute name="maven.version" value="1.0.2.RELEASE"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

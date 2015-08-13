@@ -7,13 +7,15 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'spring-boot' 
+apply plugin: 'spring-boot'
+apply plugin: 'io.spring.dependency-management' 
 
 jar {
     baseName = 'arduino'
@@ -26,6 +28,15 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    compile("org.springframework.cloud:spring-cloud-starter-eureka")
+    testCompile("org.springframework.boot:spring-boot-starter-test") 
+}
+dependencyManagement {
+	imports { 
+		mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Angel.SR3" 
+	}
+}
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
@@ -33,6 +44,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
 	compile("org.springframework.boot:spring-boot-starter-cloud-connectors")
 	compile("postgresql:postgresql:9.0-801.jdbc4")
+	compile("org.flywaydb:flyway-core:3.2.1")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
