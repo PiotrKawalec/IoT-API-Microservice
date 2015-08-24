@@ -3,25 +3,10 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/java"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="/Users/pkawalec/.gradle/caches/modules-2/files-2.1/com.netflix.hystrix/hystrix-core/1.4.10/453f7b2de4a96b579b31432dc5b5097078fc8b7d/hystrix-core-1.4.10.jar" sourcepath="/Users/pkawalec/.gradle/caches/modules-2/files-2.1/com.netflix.hystrix/hystrix-core/1.4.10/7a89317f252276e083207ef3ab13bb88bd89e72a/hystrix-core-1.4.10-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/pkawalec/.gradle/caches/modules-2/files-2.1/com.netflix.hystrix/hystrix-javanica/1.4.10/5557c0bacd8f1ed1c208578c4b5e2fdbd23dc950/hystrix-javanica-1.4.10.jar" sourcepath="/Users/pkawalec/.gradle/caches/modules-2/files-2.1/com.netflix.hystrix/hystrix-javanica/1.4.10/c40a51546d0d2616fc38cc519f4611c1f628472a/hystrix-javanica-1.4.10-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/pkawalec/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-netflix-hystrix-dashboard/1.0.3.RELEASE/563f53b6dab213858a3e8f29e0ad628b61f587f9/spring-cloud-netflix-hystrix-dashboard-1.0.3.RELEASE.jar" sourcepath="/Users/pkawalec/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-netflix-hystrix-dashboard/1.0.3.RELEASE/960c391ae95f619d7177db1fc69f31a758c63e0d/spring-cloud-netflix-hystrix-dashboard-1.0.3.RELEASE-sources.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
-	<classpathentry kind="lib" path="/Users/pkawalec/.m2/repository/org/springframework/cloud/spring-cloud-netflix-core/1.0.3.RELEASE/spring-cloud-netflix-core-1.0.3.RELEASE.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.springframework.cloud"/>
-			<attribute name="maven.artifactId" value="spring-cloud-netflix-core"/>
-			<attribute name="maven.version" value="1.0.3.RELEASE"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Users/pkawalec/.m2/repository/org/springframework/cloud/spring-cloud-commons/1.0.2.RELEASE/spring-cloud-commons-1.0.2.RELEASE.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.springframework.cloud"/>
-			<attribute name="maven.artifactId" value="spring-cloud-commons"/>
-			<attribute name="maven.version" value="1.0.2.RELEASE"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

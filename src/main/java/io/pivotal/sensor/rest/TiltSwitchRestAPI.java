@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 /**
  * Sample requests:
  * http://localhost:8080/get-all-tilt-switches
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author belle
  *
  */
+
 @RestController
 public class TiltSwitchRestAPI {
 
@@ -32,17 +35,20 @@ public class TiltSwitchRestAPI {
 	
 	//http://localhost:8080/get-tilt-switches-by-tiltId/33
 	@RequestMapping(value="/get-tilt-switches-by-tiltId/{tiltSwitchId}", method=RequestMethod.GET)
+	@HystrixCommand(fallbackMethod = "defaultFallback")
 	public TiltSwitch getTiltSwitchByTiltSwitchID(@PathVariable String tiltSwitchId) {
 		return tiltSwitchSensorService.getTiltSwitchByTiltSwitchID(tiltSwitchId);
 	}
 	
 	//http://localhost:8080/get-all-tilt-switches
 	@RequestMapping(value="/get-all-tilt-switches", method=RequestMethod.GET)
+	@HystrixCommand(fallbackMethod = "defaultFallback")
 	public Iterable<TiltSwitch> getAllTiltSwitches() {	
 		return tiltSwitchSensorService.getAllTiltSwitches();
 	}
 	
 	//http://localhost:8080/get-tilt-events-by-tiltId/34
+	@HystrixCommand(fallbackMethod = "defaultFallback")
 	@RequestMapping(value="/get-tilt-events-by-tiltId/{tiltSwitchId}", method=RequestMethod.GET)
 	public Iterable<TiltSwitchEvent> getAllTiltSwitchEventsByTiltSwitchID(@PathVariable String tiltSwitchId) {	
 		return tiltSwitchSensorService.getAllTiltSwitchEventsByTiltSwitchID(tiltSwitchId);
@@ -50,10 +56,15 @@ public class TiltSwitchRestAPI {
 	
 	//http://localhost:8080/get-all-tilt-events-by-tiltId/33/between/2014-06-12T00:00:00.000Z/2014-11-12T00:00:00.000Z
 	@RequestMapping(value="/get-all-tilt-events-by-tiltId/{tiltSwitchId}/between/{startDate}/{endDate}", method=RequestMethod.GET)
+	@HystrixCommand(fallbackMethod = "defaultFallback")
 	public Iterable<TiltSwitchEvent> getAllTiltSwitchEventsByTiltSwitchIDBetween(@PathVariable String tiltSwitchId, 
 			@PathVariable  @DateTimeFormat(iso = ISO.DATE) Date startDate, @PathVariable  @DateTimeFormat(iso = ISO.DATE) Date endDate) {	
 		return tiltSwitchSensorService.getAllTiltSwitchEventsByTiltSwitchIDBetween(tiltSwitchId, startDate, endDate);
 	}
 
+	public String defaultFallback() {
+		//System.out.println("Could not connect to service 2");
+        return "Could not connect to service";
+	}
 
 }

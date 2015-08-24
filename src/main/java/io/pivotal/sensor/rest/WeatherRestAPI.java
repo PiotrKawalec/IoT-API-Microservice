@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
+
 /**
  * Sample requests:
  * http://localhost:8080/get-weather-by-sensorid/need-a-sensor-id
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author belle
  *
  */
+
 @RestController
 public class WeatherRestAPI {
 
@@ -29,15 +33,22 @@ public class WeatherRestAPI {
 	private WeatherSensorService weatherSensorService;
 	
 	//http://localhost:8080/get-weather-by-sensorid/99
+	@HystrixCommand(fallbackMethod = "defaultFallback")
 	@RequestMapping(value="/get-weather-by-sensorid/{sensorID}", method=RequestMethod.GET)
 	public List<Weather> findBySensorID(@PathVariable String sensorID) {
 		return weatherSensorService.findBySensorID(sensorID);
 	}
 
 	//http://localhost:8080/get-all-weather-readings-by-sensorid/33/between/2014-06-12T00:00:00.000Z/2014-11-12T00:00:00.000Z
+	@HystrixCommand(fallbackMethod = "defaultFallback")
 	@RequestMapping(value="/get-all-weather-readings-by-sensorid/{sensorID}/between/{startDate}/{endDate}", method=RequestMethod.GET)
 	public List<Weather> findWeatherSensorReadingBetween(@PathVariable String sensorID, @PathVariable  @DateTimeFormat(iso = ISO.DATE) Date startDate, @PathVariable  @DateTimeFormat(iso = ISO.DATE) Date endDate) {
 		return weatherSensorService.findWeatherSensorReadingBetween(sensorID, startDate, endDate);
+	}
+	
+	public String defaultFallback() {
+		//System.out.println("Could not connect to service 2");
+        return "Could not connect to service";
 	}
 	
 }

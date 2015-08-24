@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 /**
  * Sample requests:
  * http://localhost:8080/get-all-rfids
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author belle
  *
  */
+
 @RestController
 public class RfidRestAPI {
 
@@ -32,28 +35,36 @@ public class RfidRestAPI {
 	
 	//http://localhost:8080/get-all-rfids
 	@RequestMapping(value="/get-all-rfids", method=RequestMethod.GET)
+	@HystrixCommand(fallbackMethod = "defaultFallback")
 	public Iterable<RFID> getAllRFIDs() {	
 		return rfidSensorService.findAllRfid();
 	}
 	
 	//http://localhost:8080/get-rfid-events-by-rfid/0909200181
 	@RequestMapping(value="/get-rfid-events-by-rfid/{rfid}", method=RequestMethod.GET)
+	@HystrixCommand(fallbackMethod = "defaultFallback")
 	public Iterable<RFIDEvent> getRFIDEventByRfid(@PathVariable String rfid) {
 		return rfidSensorService.findAllRfidEventsByRfid(rfid);
 	}
 	
 	//http://localhost:8080/get-rfid-by-user/3333
 	@RequestMapping(value="/get-rfid-by-user/{userId}", method=RequestMethod.GET)
+	@HystrixCommand(fallbackMethod = "defaultFallback")
 	public RFID getRFIDByUserId(@PathVariable Long userId) {	
 		return rfidSensorService.findRFIDByUserId(userId);
 	}
 	
 	//Example http://localhost:8080/get-all-rfid-events-by-rfid/12/between/2014-06-12T00:00:00.000Z/2014-11-12T00:00:00.000Z
 	@RequestMapping(value="/get-all-rfid-events-by-rfid/{rfid}/between/{startDate}/{endDate}", method=RequestMethod.GET)
+	@HystrixCommand(fallbackMethod = "defaultFallback")
 	public Iterable<RFIDEvent> getAllRFIDEventsByRfidBetween(@PathVariable String rfid, 
 			@PathVariable  @DateTimeFormat(iso = ISO.DATE) Date startDate,@PathVariable  @DateTimeFormat(iso = ISO.DATE) Date endDate) {	
 		return rfidSensorService.findAllRfidEventsByRfidBetween(rfid, startDate, endDate);
 	}
 	
+	public String defaultFallback() {
+		//System.out.println("Could not connect to service");
+        return "Could not connect to service";
+	}
 	
 }
